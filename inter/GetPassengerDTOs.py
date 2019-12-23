@@ -4,7 +4,6 @@ import json
 from config.TicketEnmu import ticket
 from myException.PassengerUserException import PassengerUserException
 import wrapcache
-import TickerConfig
 
 
 class getPassengerDTOs:

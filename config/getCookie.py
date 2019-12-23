@@ -27,7 +27,6 @@ def getDrvicesID(session):
         time.sleep(10)
         for c in driver.get_cookies():
             cookie = dict()
-            print()
             if c.get("name") == "RAIL_DEVICEID" or c.get("name") == "RAIL_EXPIRATION":
                 cookie[c.get("name")] = c.get("value")
                 cookies.append(cookie)

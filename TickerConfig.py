@@ -1,11 +1,10 @@
-# -*- coding=utf-8 -*-
 # 关于软件使用配置说明，一定要看！！！
 # ps: 如果是候补车票，需要通过人证一致性核验的用户及激活的“铁路畅行”会员可以提交候补需求，请您按照操作说明在铁路12306app.上完成人证核验
 # 关于候补了之后是否还能继续捡漏的问题在此说明： 软件为全自动候补加捡漏，如果软件候补成功则会停止抢票，发出邮件通知，但是不会影响你继续捡漏，
 # 如果这个时候捡漏捡到的话，也是可以付款成功的，也就是说，捡漏+候补，可以最大程度提升抢票成功率
 
 # 刷票模式：1=刷票 2=候补+刷票
-TICKET_TYPE = 1
+TICKET_TYPE = 2
 
 # 出发日期(list) "2018-01-06", "2018-01-07"
 STATION_DATES = [
@@ -15,13 +14,13 @@ STATION_DATES = [
 # 填入需要购买的车次(list)，"G1353"
 # 修改车次填入规则，注：(以前设置的车次逻辑不变)，如果车次填入为空，那么就是当日乘车所有车次都纳入筛选返回
 # 不填车次是整个list为空才算，如果不是为空，依然会判断车次的，这种是错误的写法 [""], 正确的写法 []
-STATION_TRAINS = ["G1120"]
+STATION_TRAINS = ["Z4177","T289"]
 
 # 出发城市，比如深圳北，就填深圳就搜得到
-FROM_STATION = "广州"
+FROM_STATION = "北京"
 
 # 到达城市 比如深圳北，就填深圳就搜得到
-TO_STATION = "武汉"
+TO_STATION = "漯河"
 
 # 座位(list) 多个座位ex:
 # "商务座",
@@ -33,7 +32,7 @@ TO_STATION = "武汉"
 # "硬座",
 # "无座",
 # "动卧",
-SET_TYPE = ["二等座"]
+SET_TYPE = ["软座","硬卧","硬座"]
 
 # 当余票小于乘车人，如果选择优先提交，则删减联系人和余票数一致在提交
 # bool
@@ -42,11 +41,11 @@ IS_MORE_TICKET = True
 # 乘车人(list) 多个乘车人ex:
 # "张三",
 # "李四"
-TICKET_PEOPLES = [""]
+TICKET_PEOPLES = ["许亚伦"]
 
 # 12306登录账号
-USER = ""
-PWD = ""
+USER = "15711068379"
+PWD = "Yl15711068379"
 
 # 加入小黑屋时间默认为5分钟，此功能为了防止僵尸票导致一直下单不成功错过正常的票
 TICKET_BLACK_LIST_TIME = 5
@@ -59,7 +58,7 @@ IS_AUTO_CODE = True
 AUTO_CODE_TYPE = 3
 
 # 此处设置云打码服务器地址，如果有自建的服务器，可以自行更改
-HOST = "120.77.154.140:8000"
+HOST = "120.24.62.193"
 REQ_URL = "/verify/base64/"
 HTTP_TYPE = "http"
 # HOST="12306.yinaoxiong.cn" #备用服务器稳定性较差
@@ -94,6 +93,12 @@ SERVER_CHAN_CONF = {
     "secret": ""
 }
 
+# 是否开启DingDing提醒,使用前请先获取钉钉机器人地址,默认关闭，开启请设置 "IS_DING_DING_CHAN"为True
+DINGDING_CONF = {
+    "IS_DING_DING_CHAN": True,
+    "ding_url": "https://oapi.dingtalk.com/robot/send?access_token=fa494c35a4b40946b4fdad3a6b620f2ee626e264b7de1812daa522b56da1c8cc"
+}
+
 # 是否开启cdn查询，可以更快的检测票票 1为开启，2为关闭
 IS_CDN = 1
 
@@ -113,21 +118,21 @@ ORDER_MODEL = 1
 IS_PROXY = 0
 
 # 预售放票时间, 如果是捡漏模式，可以忽略此操作
-OPEN_TIME = "12:59:50"
+OPEN_TIME = "08:00:00"
 # 1=使用selenium获取devicesID
 # 2=使用网页端/otn/HttpZF/logdevice获取devicesId，这个接口的算法目前可能有点问题，如果登录一直302的请改为配置1
 # 3=自己打开浏览器在headers-Cookies中抓取RAIL_DEVICEID和RAIL_EXPIRATION，这个就不用配置selenium
-COOKIE_TYPE = 3
+COOKIE_TYPE = 1
 # 如果COOKIE_TYPE=1，则需配置chromeDriver路径,下载地址http://chromedriver.storage.googleapis.com/index.html
 # chromedriver配置版本只要和chrome的大版本匹配就行
-CHROME_PATH = "/usr/src/app/chromedriver"
+CHROME_PATH = "D:/software/chromedriver_win32/chromedriver.exe"
 
 # 为了docker37 准备的环境变量，windows环境可以不用管这个参数
 CHROME_CHROME_PATH = "/opt/google/chrome/google-chrome"
 
 # 如果COOKIE_TYPE=3, 则需配置RAIL_EXPIRATION、RAIL_DEVICEID的值
-RAIL_EXPIRATION = "1577033439142"
-RAIL_DEVICEID = "PuV16sVaV-CTGsFZUuL8JLAk4OhuT1wgUYC_W3L2JZfWx8Ygx8LOPkko3PSOrK5_xSKhXjgyTMS8dBmj1RZHL2CKBTmVs6UG_yptlB4NJbGHldltrLMTUEgoDpSkpX2vzpGXgMQsTRzgOXfuQkAWwS4GjCxSmV3C; BIGipServerpassport=820510986.50215.0000; route=9036359bb8a8a461c164a04f8f50b252"
+RAIL_EXPIRATION = "1577371589308"
+RAIL_DEVICEID = "Z4jMCDaKVmohGhOrHq01r2-jWcZGGlDDqX6xBSb-c1iNQfKu3TzYoBZej85JRQjRZXk3RK_VDMBQL-Au7Ljf8vt0XeUY-CiG2fJV1zRYwqDa2xLV0gcDDxs4NUEH6csDT5vt1L98ngzjHpNN6QGRYVJCiCw6fe6M"
 
 
 # 1=>为一直随机ua,2->只启动的时候随机一次ua
